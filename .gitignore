@@ -1,0 +1,16 @@
+
+Aeternum\.Daemon/bin/Release/netcoreapp3\.0/
+
+Aeternum\.Daemon/obj/
+
+Aeternum\.Deamon/obj/Release/netcoreapp3\.0/
+
+Aeternum\.Interface/obj/
+
+Aeternum\.Tests/obj/Release/netcoreapp3\.0/
+
+Aeternum\.Tests/obj/
+
+\.idea/\.idea\.Aeternum/\.idea/
+
+\.idea/\.idea\.Aeternum/

@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeternum.Daemon", "Aeternum.Daemon\Aeternum.Daemon.csproj", "{9B72A243-724F-404E-9DB9-DD0E3606EFF1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeternum.Interface", "Aeternum.Interface\Aeternum.Interface.csproj", "{E7F8EC8E-C1B6-486D-9B2A-2117F1B0153C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeternum.Tests", "Aeternum.Tests\Aeternum.Tests.csproj", "{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9B72A243-724F-404E-9DB9-DD0E3606EFF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B72A243-724F-404E-9DB9-DD0E3606EFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B72A243-724F-404E-9DB9-DD0E3606EFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B72A243-724F-404E-9DB9-DD0E3606EFF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7F8EC8E-C1B6-486D-9B2A-2117F1B0153C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7F8EC8E-C1B6-486D-9B2A-2117F1B0153C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7F8EC8E-C1B6-486D-9B2A-2117F1B0153C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7F8EC8E-C1B6-486D-9B2A-2117F1B0153C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
