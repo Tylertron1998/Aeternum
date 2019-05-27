@@ -4,4 +4,4 @@ Aeternum:
     
 Aeternum is a keep-alive application with built in restart, log, and watch capabilities.
 
-Run `aternum --help` to see the commands.
+Run `aeternum --help` to see the commands.
