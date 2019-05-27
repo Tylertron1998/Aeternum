@@ -10,4 +10,8 @@
       <PackageReference Include="ZetaIpc" Version="1.0.0.9" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Aeternum.Utililty\Aeternum.Utililty.csproj" />
+    </ItemGroup>
+
 </Project>

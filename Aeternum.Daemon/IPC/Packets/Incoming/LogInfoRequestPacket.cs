@@ -4,13 +4,13 @@ using Newtonsoft.Json;
 
 namespace Aeternum.Daemon.IPC.Packets.Incoming
 {
-	public class LogInfoPacket
+	public struct LogInfoRequestPacket
 	{
-		public LogLevel LevelFilter { get; set; }
+		public LogLevel LevelFilter { get; }
 		public int MaxResults { get; }
 
 		[JsonConstructor]
-		public LogInfoPacket(LogLevel level = LogLevel.All, int maxResults = Int32.MaxValue)
+		public LogInfoRequestPacket(LogLevel level = LogLevel.All, int maxResults = Int32.MaxValue)
 		{
 			LevelFilter = level;
 			MaxResults = maxResults;

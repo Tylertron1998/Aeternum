@@ -1,32 +1,34 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.Tracing;
+using System.Linq;
+using System.Text;
+using Aeternum.Daemon.Monitoring.Logging;
+using Microsoft.VisualBasic;
 
 namespace Aeternum.Daemon.Monitoring
 {
 	public class Monitor
 	{
-		public MonitorSettings Settings { get; }
-		public int CurrentRetries { get; private set; }
+		public MonitorSettings Settings { get; set; }
+        public int CurrentRetries { get; private set; }
 
 		public DateTime StartTime { get; private set; }
 		public int Id { get; private set; }
-		public string Logs { get; private set; }
+        
+        public MonitorLogs Logs { get; private set; }
 
-		public Monitor(string name, string fileName, string flags = "", string userName = "", int maxRetries = 10,
-			int minimumUptime = 100,
-			bool shouldLog = true)
-		{
-			Settings = new MonitorSettings
-			{
-				Name = name,
-				FileName = fileName,
-				Flags = flags,
-				UserName = userName,
-				MaxRetries = maxRetries,
-				MinimumUptime = minimumUptime,
-				ShouldLog = shouldLog,
-			};
-		}
+		public Monitor(MonitorSettings settings)
+        {
+            Settings = settings;
+
+            Logs = new MonitorLogs
+            {
+                StandardOut = new List<string>(),
+                StandardError = new List<string>()
+            };
+        }
 
 		public bool IsRunning
 		{
@@ -47,11 +49,10 @@ namespace Aeternum.Daemon.Monitoring
 		public double Uptime => (DateTime.Now - StartTime).TotalMilliseconds;
 		public bool Stable => Uptime > Settings.MinimumUptime;
 
-		public bool ShouldRestart => !_stopped && CurrentRetries < Settings.MaxRetries && Stable;
+		public bool ShouldRestart => !Stopped && CurrentRetries < Settings.MaxRetries && Stable;
 
-		private bool _stopped;
-
-		public void Restart()
+        public bool Stopped { get; private set; }
+        public void Restart()
 		{
 			Start(StartTime);
 
@@ -68,23 +69,25 @@ namespace Aeternum.Daemon.Monitoring
 		public void Reset()
 		{
 			CurrentRetries = 0;
-			Logs = "";
-		}
+            Logs.StandardOut.Clear();
+            Logs.StandardError.Clear();
+        }
 
 		public void Stop()
 		{
-			_stopped = true;
+			Stopped = true;
 			Process.GetProcessById(Id).Kill();
-		}
+            Reset();
+        }
 
 		public void Start(DateTime? startTime = null)
 		{
-			_stopped = false;
+			Stopped = false;
 			var process = Process.Start(new ProcessStartInfo
 			{
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
-				FileName = Settings.Name,
+				FileName = Settings.Command,
 				Arguments = Settings.Flags
 			});
 			StartTime = startTime ?? DateTime.Now;
@@ -92,9 +95,38 @@ namespace Aeternum.Daemon.Monitoring
 
 			if (Settings.ShouldLog)
 			{
-				process.OutputDataReceived += (sender, args) => Logs += args.Data;
-				process.ErrorDataReceived += (sender, args) => Logs += args.Data;
-			}
+				process.OutputDataReceived += (sender, args) => Logs.StandardOut.Add(args.Data);
+            }
+
+            if (Settings.ShouldLogError)
+            {
+                process.ErrorDataReceived += (sender, args) => Logs.StandardError.Add(args.Data);
+            }
 		}
-	}
+
+        public override string ToString()
+        {
+            var process = Process.GetProcessById(Id);
+
+            var currentCpuUsage = (process.TotalProcessorTime.TotalMilliseconds / Environment.ProcessorCount) * 100;
+            var currentMemory = process.WorkingSet64;
+
+            var dividedCpu = currentCpuUsage / 10;
+
+            var builder = new StringBuilder();
+
+            builder.AppendLine(Settings.Name);
+
+            builder.AppendLine($"CPU: {currentCpuUsage} [{new String('=', (int)dividedCpu)}{new String(' ', 100 - (int)dividedCpu)}]");
+            builder.AppendLine($"Memory: {currentMemory * 1024 * 1024}MB");
+            builder.AppendLine($"Restarts: {CurrentRetries} (Max {Settings.MaxRetries})");
+            builder.AppendLine($"Uptime: {Uptime}");
+            builder.AppendLine($"Flags: {Settings.Flags}");
+            builder.AppendLine($"Logs: {Logs.StandardOut.Count} (Error Logs): {Logs.StandardError.Count}");
+
+
+            return builder.ToString();
+
+        }
+    }
 }

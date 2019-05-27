@@ -1,6 +1,6 @@
 namespace Aeternum.Daemon.IPC.Packets.Incoming
 {
-	public struct StopPacket
+	public struct MonitorLogsRequestPacket
 	{
 		public string Name { get; set; }
 	}

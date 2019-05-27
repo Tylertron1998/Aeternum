@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeternum.Interface", "Aeter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeternum.Tests", "Aeternum.Tests\Aeternum.Tests.csproj", "{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aeternum.Utililty", "Aeternum.Utililty\Aeternum.Utililty.csproj", "{3BE56CCB-C61C-4FE1-B70C-8A979E1896C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5DAD57B-7BBE-4FFC-A874-F2BE0161E246}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE56CCB-C61C-4FE1-B70C-8A979E1896C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE56CCB-C61C-4FE1-B70C-8A979E1896C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE56CCB-C61C-4FE1-B70C-8A979E1896C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE56CCB-C61C-4FE1-B70C-8A979E1896C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
